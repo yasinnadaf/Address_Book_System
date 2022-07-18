@@ -1,6 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
-   public class ContactsDetails {
+   public class ContactDetails {
        private String firstName;
        private String lastName;
        private String address;
