@@ -2,7 +2,7 @@ package com.bridgelabz.addressbooksystem;
 
 import java.util.Scanner;
 
-public class ContactDetails {
+public class Contact {
 
        private String firstName;
        private String lastName;
@@ -14,6 +14,7 @@ public class ContactDetails {
        private String email;
 
        public String getFirstName() {
+
            return firstName;
        }
 
@@ -77,7 +78,22 @@ public class ContactDetails {
            this.email = email;
        }
        Scanner sc = new Scanner(System.in);
-       public void createContacts() {
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zip +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    public void createContacts() {
            System.out.print(" Enter First Name : ");
            setFirstName(sc.nextLine());
            System.out.print(" Enter Last Name : ");
@@ -94,5 +110,8 @@ public class ContactDetails {
            setPhoneNumber(sc.nextLong());
            System.out.print(" Enter Email : ");
            setEmail(sc.nextLine());
+
+
+
        }
    }
