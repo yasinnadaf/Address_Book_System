@@ -29,4 +29,43 @@ public class AddressBook {
 
         arrayList.add(contact);
     }
+
+    void editContact(){
+
+        System.out.println("enter the first name of a person to edit");
+        String firstName = scanner.next();
+        if(firstName.equals(contact.getFirstName())){
+            System.out.println("Edit the details of person: ");
+
+            System.out.println("Edit first name: ");
+            contact.setFirstName(scanner.next());
+
+            System.out.println("Edit last name: ");
+            contact.setLastName(scanner.next());
+
+            System.out.println("Edit address: ");
+            contact.setAddress(scanner.next());
+
+            System.out.println("Edit city: ");
+            contact.setCity(scanner.next());
+
+            System.out.println("Edit state: ");
+            contact.setState(scanner.next());
+
+            System.out.println("Edit zip code: ");
+            contact.setZip(scanner.nextInt());
+
+            System.out.println("Edit phone number:");
+            contact.setPhoneNumber(scanner.nextInt());
+
+            System.out.println("Edit email: ");
+            contact.setEmail(scanner.next());
+        }
+
+        else{
+            System.out.println("person not found");
+        }
+
+
+    }
 }

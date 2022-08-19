@@ -7,5 +7,7 @@ public class AddressBookMainClass {
        AddressBook add = new AddressBook();
        add.addContact();
         System.out.println(add.arrayList);
+        add.editContact();
+
     }
 }
