@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook {
-    ArrayList<Contact> arrayList = new ArrayList<>();
+    ArrayList<Contact> contactList = new ArrayList<>();
     Contact contact = new Contact();
     Scanner scanner = new Scanner(System.in);
 
@@ -26,7 +26,7 @@ public class AddressBook {
         System.out.println("Enter email: ");
         contact.setEmail(scanner.next());
 
-        arrayList.add(contact);
+        contactList.add(contact);
     }
 
     void editContact(){
