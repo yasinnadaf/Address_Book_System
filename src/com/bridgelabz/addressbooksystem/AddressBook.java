@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook {
-    ArrayList<Contact> arrayList = new ArrayList<>();
+    ArrayList<Contact> contactList = new ArrayList<>();
     Contact contact = new Contact();
     Scanner scanner = new Scanner(System.in);
 
@@ -26,7 +26,7 @@ public class AddressBook {
         System.out.println("Enter email: ");
         contact.setEmail(scanner.next());
 
-        arrayList.add(contact);
+        contactList.add(contact);
     }
 
     void editContact(){
@@ -66,5 +66,16 @@ public class AddressBook {
         }
 
 
+    }
+    void deleteContact(){
+        System.out.println("Enter the first name of contact you want to delete");
+        String firstName = scanner.next();
+        if(firstName.equals(contact.getFirstName())){
+            contactList.remove(contact);
+            System.out.println("contact deleted successfully");
+        }
+        else{
+            System.out.println("contact not found");
+        }
     }
 }
