@@ -86,4 +86,11 @@ public class AddressBook {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "AddressBook{" +
+                "contactList=" + contactList +
+                '}';
+    }
 }
