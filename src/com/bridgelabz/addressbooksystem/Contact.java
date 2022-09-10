@@ -79,6 +79,22 @@ public class Contact {
        }
        Scanner sc = new Scanner(System.in);
 
+    public Contact(String firstName, String lastName, String address, String city, String state, int zip,
+                          long phoneNumber, String email) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+    public Contact(){
+
+    }
+
     @Override
     public String toString() {
         return "Contact{" +
@@ -94,3 +110,4 @@ public class Contact {
 
         }
    }
+
