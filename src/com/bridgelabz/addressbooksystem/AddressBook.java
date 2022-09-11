@@ -94,6 +94,48 @@ public class AddressBook {
         }
     }
 
+    void searchContact(){
+        if(contactList.isEmpty()){
+            System.out.println("No contact to search in addressbook");
+            return;
+        }
+        boolean exit = false;
+        while (!exit){
+            System.out.println("""
+                Enter option
+                1) To search by City
+                2) To search by State
+                3) To exit
+                """);
+            int option = scanner.nextInt();
+            switch (option){
+                case 1:
+                    System.out.println("Enter the city to search contact");
+                    String city = scanner.next();
+                    for(Contact contacts : contactList){
+                        if(contacts.getCity().contains(city)){
+                            System.out.println(contacts);
+                        }
+                    }
+                    break;
+                case 2:
+                    System.out.println("Enter the city to search contact");
+                    String state = scanner.next();
+                    for (Contact contacts : contactList){
+                        if(contacts.getState().contains(state)){
+                            System.out.println(contacts);
+                        }
+                    }
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "AddressBook{" +
