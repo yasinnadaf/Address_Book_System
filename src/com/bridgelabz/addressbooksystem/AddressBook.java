@@ -9,9 +9,16 @@ public class AddressBook {
     Scanner scanner = new Scanner(System.in);
 
     void addContact() {
-        Contact contact = new Contact();
         System.out.println("Enter first name: ");
-        contact.setFirstName(scanner.next());
+        String firstName = scanner.next();
+        for(Contact contacts : contactList){
+            if(contacts.getFirstName().equals(firstName)){
+                System.out.println("contact already exists");
+                return;
+            }
+        }
+        Contact contact = new Contact();
+        contact.setFirstName(firstName);
         System.out.println("Enter last name: ");
         contact.setLastName(scanner.next());
         System.out.println("Enter the address: ");
