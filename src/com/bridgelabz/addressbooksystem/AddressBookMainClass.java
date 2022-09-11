@@ -15,7 +15,7 @@ public class AddressBookMainClass {
         Scanner scr = new Scanner(System.in);
         boolean exit = true;
         do {
-            System.out.println("Enter options:\n1) To add contact\n2) To add family contact\n3) To edit Contact\n4) To display Contacts\n5) To delete contact\n6) To exit");
+            System.out.println("Enter options:\n1) To add contact\n2) To add family contact\n3) To edit Contact\n4) To display Contacts\n5) To delete contact\n6)To search contact\n7) To exit");
             int option = scr.nextInt();
             switch (option) {
                 case 1:
@@ -34,6 +34,9 @@ public class AddressBookMainClass {
                     professionalAddressBook.deleteContact();
                     break;
                 case 6:
+                    professionalAddressBook.searchContact();
+                    break;
+                case 7:
                     exit = false;
                 default:
                     break;
