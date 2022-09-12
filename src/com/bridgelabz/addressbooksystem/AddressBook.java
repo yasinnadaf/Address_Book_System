@@ -1,10 +1,14 @@
 package com.bridgelabz.addressbooksystem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBook {
     ArrayList<Contact> contactList = new ArrayList<>();
+    Map<String,Contact> cityContactList = new HashMap<>();
+    Map<String,Contact> stateContactList  = new HashMap<>();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -37,7 +41,7 @@ public class AddressBook {
         contactList.add(contact);
     }
 
-    public void showDetails(ArrayList<Contact> contactList) {
+    public void showDetails() {
         for(Contact contact : this.contactList){
             System.out.println(contact.toString());
         }
@@ -132,6 +136,41 @@ public class AddressBook {
                     break;
                 default:
                     break;
+            }
+        }
+    }
+
+    void viewContact(){
+        System.out.println("\n1)View by City \\n2.View by State");
+        switch (scanner.nextInt()) {
+            case 1:
+                viewContactByCity();
+                break;
+            case 2:
+                viewContactByState();
+                break;
+            default:
+                viewContact();
+                break;
+        }
+    }
+
+    void viewContactByCity(){
+        System.out.println("Enter City:");
+        String city = scanner.next();
+        for (String key : cityContactList.keySet()) {
+            if (key.equals(city)){
+                System.out.println(cityContactList.get(city));
+            }
+        }
+    }
+
+    void viewContactByState(){
+        System.out.println("Enter State:");
+        String state = scanner.next();
+        for (String key : stateContactList.keySet()) {
+            if (key.equalsIgnoreCase(state)){
+                System.out.println(stateContactList.get(state));
             }
         }
     }
