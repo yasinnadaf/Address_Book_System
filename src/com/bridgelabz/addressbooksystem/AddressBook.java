@@ -4,11 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook {
-//    Map<String,ArrayList<Contact>> addressBookList  = new HashMap<>();
     ArrayList<Contact> contactList = new ArrayList<>();
-    Map<String, Contact> cityContactList = new HashMap<>();
-    Map<String, Contact> stateContactList  = new HashMap<>();
-
     Scanner scanner = new Scanner(System.in);
 
     void addContact() {
@@ -156,6 +152,34 @@ public class AddressBook {
             }
         }
     }
+
+    void sortByCity(){
+        if (contactList.isEmpty()) {
+            System.out.println("No contacts in the addressBook");
+            return;
+        }
+        contactList.sort(Comparator.comparing(Contact::getCity));
+        contactList.forEach(System.out::println);
+    }
+
+    void sortByState(){
+        if (contactList.isEmpty()) {
+            System.out.println("No contacts in the addressBook");
+            return;
+        }
+        contactList.sort(Comparator.comparing(Contact::getState));
+        contactList.forEach(System.out::println);
+    }
+
+    void sortByZipCode(){
+        if (contactList.isEmpty()) {
+            System.out.println("No contacts in the addressBook");
+            return;
+        }
+        contactList.sort(Comparator.comparing(Contact::getzip));
+        contactList.forEach(System.out::println);
+    }
+
     @Override
     public String toString() {
         return  contactList +
