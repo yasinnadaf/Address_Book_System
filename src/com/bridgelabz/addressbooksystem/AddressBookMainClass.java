@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -13,9 +14,9 @@ public class AddressBookMainClass {
         AddressBook professionalAddressBook = new AddressBook();
 
         Scanner scr = new Scanner(System.in);
-        boolean exit = true;
+        boolean exit = false;
         do {
-            System.out.println("Enter options:\n1) To add contact\n2) To add family contact\n3) To edit Contact\n4) To display Contacts\n5) To delete contact\n6) To search contact\n7) print contact\n8) To exit");
+            System.out.println("Enter options:\n1) To add contact\n2) To add family contact\n3) To edit Contact\n4) To display Contacts\n5) To delete contact\n6) To view contact\n7) To exit");
             int option = scr.nextInt();
             switch (option) {
                 case 1:
@@ -34,13 +35,10 @@ public class AddressBookMainClass {
                     professionalAddressBook.deleteContact();
                     break;
                 case 6:
-                    professionalAddressBook.searchContact();
+                    professionalAddressBook.viewContacts();
                     break;
                 case 7:
-                    professionalAddressBook.printContacts();
-                    break;
-                case 8:
-                    exit = false;
+                    exit = true;
                 default:
                     break;
             }
