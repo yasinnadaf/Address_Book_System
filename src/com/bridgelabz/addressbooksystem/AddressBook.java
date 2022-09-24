@@ -6,9 +6,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBook {
+//    Map<String,ArrayList<Contact>> addressBookList  = new HashMap<>();
     ArrayList<Contact> contactList = new ArrayList<>();
-    Map<String,Contact> cityContactList = new HashMap<>();
-    Map<String,Contact> stateContactList  = new HashMap<>();
+    Map<String, Contact> cityContactList = new HashMap<>();
+    Map<String, Contact> stateContactList  = new HashMap<>();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -112,6 +113,7 @@ public class AddressBook {
                 3) To exit
                 """);
             int option = scanner.nextInt();
+
             switch (option){
                 case 1:
                     System.out.println("Enter the city to search contact");
@@ -140,45 +142,63 @@ public class AddressBook {
         }
     }
 
-    void viewContact(){
-        System.out.println("\n1)View by City \\n2.View by State");
-        switch (scanner.nextInt()) {
-            case 1:
-                viewContactByCity();
-                break;
-            case 2:
-                viewContactByState();
-                break;
-            default:
-                viewContact();
-                break;
+    void printContacts(){
+        if(contactList.isEmpty()){
+            System.out.println("No contacts to display");
+            return;
         }
-    }
+        boolean exit = false;
+        while(!exit) {
+            System.out.println("""
+                    Enter option
+                    1) To view by City
+                    2) To view by State
+                    3) To exit
+                    """);
+            int option = scanner.nextInt();
+            switch (option) {
+                case 1:
+                    System.out.println("Enter the city name to view");
+                    String city = scanner.next().toLowerCase();
+                    for (AddressBook addressBooks : AddressBookMainClass.addressBookMap.values()) {
+                        for (Contact contacts : addressBooks.contactList) {
+                            if (contacts.getCity().toLowerCase().contains(city)) {
+                                cityContactList.put(city, contacts);
+                            }
+                        }
+                    }
+                    System.out.println("No of contacts in city "+city+" are "+cityContactList.size());
+                    System.out.println("Contacts in city "+city+" are:");
+                    System.out.println(cityContactList.keySet());
+                    break;
+                case 2:
+                    System.out.println("Enter the state name to view");
+                    String state = scanner.next().toLowerCase();
+                    for (AddressBook addressBooks : AddressBookMainClass.addressBookMap.values()) {
+                        for (Contact contacts : addressBooks.contactList) {
+                            if (contacts.getState().toLowerCase().contains(state)) {
+                                stateContactList.put(state, contacts);
+                            }
+                        }
+                    }
+                    System.out.println("No of contacts in state "+state+" are "+stateContactList.size());
+                    System.out.println("Contacts in state "+state+" are:");
+                    System.out.println(stateContactList.keySet());
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+                default:
+                    break;
 
-    void viewContactByCity(){
-        System.out.println("Enter City:");
-        String city = scanner.next();
-        for (String key : cityContactList.keySet()) {
-            if (key.equals(city)){
-                System.out.println(cityContactList.get(city));
             }
         }
-    }
 
-    void viewContactByState(){
-        System.out.println("Enter State:");
-        String state = scanner.next();
-        for (String key : stateContactList.keySet()) {
-            if (key.equalsIgnoreCase(state)){
-                System.out.println(stateContactList.get(state));
-            }
-        }
     }
 
     @Override
     public String toString() {
-        return "AddressBook{" +
-                "contactList=" + contactList +
-                '}';
+        return  contactList +
+                "}\n";
     }
 }

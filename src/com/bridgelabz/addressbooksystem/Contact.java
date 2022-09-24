@@ -1,86 +1,88 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Contact {
 
-       private String firstName;
-       private String lastName;
-       private String address;
-       private String city;
-       private String state;
-       private int zip;
-       private long phoneNumber;
-       private String email;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String city;
+    private String state;
+    private int zip;
+    private long phoneNumber;
+    private String email;
 
-       public String getFirstName() {
+    public String getFirstName() {
 
-           return firstName;
-       }
+        return firstName;
+    }
 
-       public void setFirstName(String firstName) {
-           this.firstName = firstName;
-       }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-       public String getLastName(){
-           return lastName;
-       }
+    public String getLastName() {
+        return lastName;
+    }
 
-       public void setLastName(String lastName) {
-           this.lastName = lastName;
-       }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-       public String getAddress(){
-           return address;
-       }
+    public String getAddress() {
+        return address;
+    }
 
-       public void setAddress(String address) {
-           this.address = address;
-       }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-       public String getCity(){
-           return city;
-       }
+    public String getCity() {
+        return city;
+    }
 
-       public void setCity(String city) {
-           this.city = city;
-       }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-       public String getState(){
-           return state;
-       }
+    public String getState() {
+        return state;
+    }
 
-       public void setState(String state) {
-           this.state = state;
-       }
+    public void setState(String state) {
+        this.state = state;
+    }
 
-       public int getzip(){
-           return zip;
-       }
+    public int getzip() {
+        return zip;
+    }
 
-       public void setZip(int zip) {
-           this.zip = zip;
-       }
+    public void setZip(int zip) {
+        this.zip = zip;
+    }
 
-       public long getPhoneNumber() {
-           return phoneNumber;
-       }
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
 
-       public void setPhoneNumber(long phoneNumber) {
-           this.phoneNumber = phoneNumber;
-       }
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-       public String getEmail() {
-           return email;
-       }
+    public String getEmail() {
+        return email;
+    }
 
-       public void setEmail(String email) {
-           this.email = email;
-       }
-       Scanner sc = new Scanner(System.in);
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    Scanner sc = new Scanner(System.in);
 
     public Contact(String firstName, String lastName, String address, String city, String state, int zip,
-                          long phoneNumber, String email) {
+                   long phoneNumber, String email) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -91,7 +93,8 @@ public class Contact {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
-    public Contact(){
+
+    public Contact() {
 
     }
 
@@ -108,6 +111,11 @@ public class Contact {
                 ", email='" + email + '\'' +
                 '}';
 
-        }
-   }
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+}
