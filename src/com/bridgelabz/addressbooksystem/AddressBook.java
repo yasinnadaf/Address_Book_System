@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -7,7 +8,7 @@ public class AddressBook {
     ArrayList<Contact> contactList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
-    void addContact() {
+    void addContact() throws IOException {
         System.out.println("Enter the first name");
         String firstName = scanner.next().toLowerCase();
         if (contactList.stream().anyMatch(x -> x.getFirstName().toLowerCase().equals(firstName))) {
@@ -30,17 +31,19 @@ public class AddressBook {
         contact.setPhoneNumber(scanner.nextLong());
         System.out.println("Enter email: ");
         contact.setEmail(scanner.next());
-
+        contactList.sort(Comparator.comparing(Contact::getFirstName));
         contactList.add(contact);
+        writeData();
     }
 
-    public void showDetails() {
+    public void showDetails() throws IOException {
         if(contactList.isEmpty()){
             System.out.println("No contacts to search in the addressBook");
             return;
         }
         contactList.sort(Comparator.comparing(Contact::getFirstName));
-        contactList.forEach(System.out::println);
+//        contactList.forEach(System.out::println);
+        readData();
     }
 
     void editContact() {
@@ -92,6 +95,16 @@ public class AddressBook {
                 System.out.println("contact not found");
             }
         }
+    }
+
+    void writeData() throws IOException {
+        FileIOService fileIOService = new FileIOService();
+        fileIOService.writeData();
+    }
+
+    void readData() throws IOException {
+        FileIOService fileIOService = new FileIOService();
+        fileIOService.readData();
     }
 
     void viewContacts() {
