@@ -1,53 +1,105 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBookMainClass {
-    static final String FAMILY_ADDRESSBOOK = "family address book";
-    static final String PROFESSIONAL_ADDRESSBOOK = "Professional address book";
     static HashMap <String,AddressBook> addressBookMap = new HashMap<>();
-    public static void main(String[] args) {
+    public static ArrayList<String>  addressBooks = new ArrayList<>();
+    static AddressBook addressBook;
+    static String addressBookName;
+    static String currentAddressBook;
+   static Scanner scr = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
 
-        AddressBook familyAddressBook = new AddressBook();
-        AddressBook professionalAddressBook = new AddressBook();
-
-        Scanner scr = new Scanner(System.in);
         boolean exit = false;
-        do {
-            System.out.println("Enter options:\n1) To add contact\n2) To add family contact\n3) To edit Contact\n4) To display Contacts\n5) To delete contact\n6) To view contact\n7) To exit");
+        while (!exit) {
+            System.out.println("Enter options:\n1) To add contact\n2) To edit Contact\n3) To view contact\n4) To delete contact\n5) To add or select addressbook \n6)To display Contacts\n7) To exit");
             int option = scr.nextInt();
             switch (option) {
                 case 1:
-                    professionalAddressBook.addContact();
+                    try {
+                        addressBookMap.get(currentAddressBook).addContact();
+                    }catch (Exception e){
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
                     break;
                 case 2:
-                    familyAddressBook.addContact();
+                    try {
+                        addressBookMap.get(currentAddressBook).editContact();
+                    }catch (Exception e){
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
                     break;
                 case 3:
-                    professionalAddressBook.editContact();
+                    try {
+                        addressBookMap.get(currentAddressBook).viewContacts();
+                    }catch (Exception e){
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
                     break;
                 case 4:
-                    professionalAddressBook.showDetails();
+                    try {
+                        addressBookMap.get(currentAddressBook).deleteContact();
+                    }catch (Exception e){
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
                     break;
                 case 5:
-                    professionalAddressBook.deleteContact();
+                    chooseAddressBook();
                     break;
                 case 6:
-                    professionalAddressBook.viewContacts();
+                    try {
+                        addressBookMap.get(currentAddressBook).showDetails();
+                    }catch (Exception e){
+                        System.out.println("\nNo AddressBook Found\n");
+                    }
                     break;
                 case 7:
                     exit = true;
                 default:
                     break;
             }
-        }while(exit);
-
-        addressBookMap.put(FAMILY_ADDRESSBOOK, familyAddressBook);
-        addressBookMap.put(PROFESSIONAL_ADDRESSBOOK, professionalAddressBook);
-
+        }
+        System.out.println(addressBooks);
         System.out.println(addressBookMap.toString());
+    }
+
+        static void chooseAddressBook() {
+            System.out.println("""
+        Press 1 to add AddressBook
+        Press 2 to select AddressBook""");
+
+            int option = scr.nextInt();
+            switch (option) {
+                case 1:
+                    System.out.println("Enter address book name");
+                    addressBookName = scr.next().toLowerCase();
+                    if (addressBookMap.containsKey(addressBookName)) {
+                        System.out.println("\nAddress book already exist\n");
+                        chooseAddressBook();
+                    } else {
+                        addressBook = new AddressBook();
+                        addressBookMap.put(addressBookName, addressBook);
+                        currentAddressBook = addressBookName;
+                    }
+                    addressBooks.add(addressBookName);
+                    break;
+                case 2:
+                    System.out.println("Enter address book name");
+                    addressBookName = scr.next().toLowerCase();
+                    if (!addressBookMap.containsKey(addressBookName)) {
+                        System.out.println("\nAddressBook not Found\n");
+                        chooseAddressBook();
+                    } else
+                        currentAddressBook = addressBookName;
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
-}
+
