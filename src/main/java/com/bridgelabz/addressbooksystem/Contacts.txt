@@ -1,0 +1,2 @@
+familybookContact{firstName='zain', lastName='malik', address='juhu', city='mumbai', state='mh', zip=999, phoneNumber=8888888899, email='kail@mail.com'}
+friendsbookContact{firstName='yasin', lastName='nadaf', address='nagar', city='solapur', state='mh', zip=888, phoneNumber=9999099900, email='mail@.com'}

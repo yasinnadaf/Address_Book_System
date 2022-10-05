@@ -10,8 +10,8 @@ public class Contact {
     private String address;
     private String city;
     private String state;
-    private int zip;
-    private long phoneNumber;
+    private String zip;
+    private String phoneNumber;
     private String email;
 
     public String getFirstName() {
@@ -55,19 +55,19 @@ public class Contact {
         this.state = state;
     }
 
-    public int getzip() {
+    public String getzip() {
         return zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -81,8 +81,8 @@ public class Contact {
 
     Scanner sc = new Scanner(System.in);
 
-    public Contact(String firstName, String lastName, String address, String city, String state, int zip,
-                   long phoneNumber, String email) {
+    public Contact(String firstName, String lastName, String address, String city, String state, String zip,
+                   String phoneNumber, String email) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
