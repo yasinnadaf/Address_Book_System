@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 public class AddressBook {
     ArrayList<Contact> contactList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
-    private static final String PATH = "C:\\AddressBookSystem\\src\\main\\resources";
-
 
 
     void addContact() {
@@ -35,12 +33,12 @@ public class AddressBook {
         contact.setPhoneNumber(scanner.next());
         System.out.println("Enter email: ");
         contact.setEmail(scanner.next());
-
+        contactList.sort(Comparator.comparing(Contact::getFirstName));
         contactList.add(contact);
     }
 
     void writeAddressBook(ArrayList<Contact> arrayList,String addressBookName) throws IOException {
-        System.out.println("Enter\n 1) To write to txt file\n 2) To write to CSV file");
+        System.out.println("Enter\n 1) To write to txt file\n 2) To write to CSV file\n3) To write to json file");
         int option = scanner.nextInt();
         switch (option){
             case 1:
@@ -49,12 +47,15 @@ public class AddressBook {
             case 2:
                 FileReaderWriter.writeCSV(arrayList, addressBookName);
                 break;
+            case 3:
+                FileReaderWriter.writeJson(arrayList, addressBookName);
+                break;
         }
 
     }
 
     void readAddressBook(String addressBookName) throws IOException {
-        System.out.println("Select option \n1.read from text file \n2.read from csv file");
+        System.out.println("Select option \n1.read from text file \n2.read from csv file\n3) read from json");
         int option = scanner.nextInt();
         switch (option) {
             case 1:
@@ -62,6 +63,9 @@ public class AddressBook {
                 break;
             case 2:
                 FileReaderWriter.readCSVFile(new File(FileReaderWriter.PATH.concat( addressBookName +".csv")));
+                break;
+            case 3:
+                FileReaderWriter.readCSVJsonFile(new File(FileReaderWriter.PATH.concat( addressBookName +".json")));
                 break;
         }
     }
