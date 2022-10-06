@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbooksystem;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class AddressBookMainClass {
 
         boolean exit = false;
         while (!exit) {
-            System.out.println("Enter options:\n1) To add contact\n2) To edit Contact\n3) To view contact\n4) To delete contact\n5) To add or select addressbook \n6) To display Contacts\n7) To write addressbook to files\n8) To read addressbook from files\n9) To print names of all addressBooks \n10)To exit");
+            System.out.println("Enter options:\n1) To add contact\n2) To edit Contact\n3) To view contact\n4) To delete contact\n5) To add or select addressbook \n6) To display Contacts\n7) To write addressbook to files\n8) To read addressbook from files\n9) TO update database contacts \n10)To exit");
             int option = scr.nextInt();
             switch (option) {
                 case 1:
@@ -66,13 +67,17 @@ public class AddressBookMainClass {
                     break;
                 case 8:
                     try {
-                        addressBookMap.get(currentAddressBook).readAddressBook(currentAddressBook);
-                    } catch (IOException e) {
+                        AddressBook.readAddressBook();;
+                    } catch (IOException | SQLException e) {
                         System.out.println("Catch BLock");
                     }
                     break;
                 case 9:
-                    System.out.println(addressBooks);
+                    try {
+                        DBOperations.updateData();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 10:
                     exit = true;
@@ -81,7 +86,7 @@ public class AddressBookMainClass {
             }
         }
 
-        System.out.println(addressBookMap.toString());
+//        System.out.println(addressBookMap.toString());
     }
 
     static void chooseAddressBook() {

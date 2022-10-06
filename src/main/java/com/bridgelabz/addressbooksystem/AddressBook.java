@@ -2,15 +2,16 @@ package com.bridgelabz.addressbooksystem;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook {
     ArrayList<Contact> contactList = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
 
-    void addContact() {
+    void addContact() throws SQLException {
         System.out.println("Enter the first name");
         String firstName = scanner.next().toLowerCase();
         if (contactList.stream().anyMatch(x -> x.getFirstName().toLowerCase().equals(firstName))) {
@@ -35,6 +36,7 @@ public class AddressBook {
         contact.setEmail(scanner.next());
         contactList.sort(Comparator.comparing(Contact::getFirstName));
         contactList.add(contact);
+        DBOperations.addContactToDatabase(contact);
     }
 
     void writeAddressBook(ArrayList<Contact> arrayList,String addressBookName) throws IOException {
@@ -54,9 +56,14 @@ public class AddressBook {
 
     }
 
-    void readAddressBook(String addressBookName) throws IOException {
-        System.out.println("Select option \n1.read from text file \n2.read from csv file\n3) read from json");
+    static void readAddressBook() throws IOException, SQLException {
+        System.out.println("Select option \n1.read from text file \n2.read from csv file\n3) read from json\\n 4) To read from addressBook database");
         int option = scanner.nextInt();
+        String addressBookName = null;
+        if(!(option == 4)){
+            System.out.println("Enter the addressBook name");
+            addressBookName = scanner.next().toLowerCase();
+        }
         switch (option) {
             case 1:
                 FileReaderWriter.readTxtFile(new File(FileReaderWriter.PATH.concat(addressBookName+".txt")));
@@ -66,6 +73,11 @@ public class AddressBook {
                 break;
             case 3:
                 FileReaderWriter.readCSVJsonFile(new File(FileReaderWriter.PATH.concat( addressBookName +".json")));
+                break;
+            case 4:
+                DBOperations.retrieveDataByDates();
+                break;
+            default:
                 break;
         }
     }

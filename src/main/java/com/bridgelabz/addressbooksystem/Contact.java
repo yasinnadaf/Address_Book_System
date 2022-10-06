@@ -113,9 +113,8 @@ public class Contact {
 
 
     }
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
-//    @Override
-//    public boolean equals(Object obj) {
-//        return super.equals(obj);
-//    }
-//}
