@@ -16,7 +16,7 @@ public class AddressBookMainClass {
 
         boolean exit = false;
         while (!exit) {
-            System.out.println("Enter options:\n1) To add contact\n2) To edit Contact\n3) To view contact\n4) To delete contact\n5) To add or select addressbook \n6) To display Contacts\n7) To write addressbook to files\n8) To read addressbook from files\n9) To exit");
+            System.out.println("Enter options:\n1) To add contact\n2) To edit Contact\n3) To view contact\n4) To delete contact\n5) To add or select addressbook \n6) To display Contacts\n7) To write addressbook to files\n8) To read addressbook from files\n9) To print names of all addressBooks \n10)To exit");
             int option = scr.nextInt();
             switch (option) {
                 case 1:
@@ -70,13 +70,17 @@ public class AddressBookMainClass {
                     } catch (IOException e) {
                         System.out.println("Catch BLock");
                     }
+                    break;
                 case 9:
+                    System.out.println(addressBooks);
+                    break;
+                case 10:
                     exit = true;
                 default:
                     break;
             }
         }
-        System.out.println(addressBooks);
+
         System.out.println(addressBookMap.toString());
     }
 

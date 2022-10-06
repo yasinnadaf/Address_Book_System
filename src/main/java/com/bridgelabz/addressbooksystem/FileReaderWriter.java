@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
+import com.google.gson.Gson;
 import com.opencsv.CSVWriter;
 
 import java.io.*;
@@ -8,13 +9,22 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileReaderWriter {
-    static final String PATH = "C:\\AddressBookSystem\\src\\main\\resources";
+    static final String PATH = "C:\\AddressBookSystem\\src\\main\\resources\\AddressBook.json";
 
     static void readTxtFile(File file) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         String string;
         while ((string = bufferedReader.readLine()) != null)
             System.out.println(string);
+    }
+
+    static void readCSVJsonFile(File file) throws IOException {
+        Scanner scr = new Scanner(file);
+        scr.useDelimiter(",");
+        while (scr.hasNext()) {
+            System.out.print(scr.next());
+        }
+        scr.close();
     }
 
     static void readCSVFile(File file) throws IOException {
@@ -48,6 +58,18 @@ public class FileReaderWriter {
             data.add(contactData);
         }
         csvWriter.writeAll(data);
+        fileWriter.close();
+    }
+
+    public static void writeJson(ArrayList<Contact> arrayList, String addressBookName) throws IOException {
+        File file = new File(PATH + addressBookName + ".json");
+        FileWriter fileWriter = new FileWriter(file);
+        Gson gson = new Gson();
+        String data="";
+        for (Contact contact : arrayList) {
+            data = data.concat(gson.toJson(contact)+"\n");
+        }
+        fileWriter.write(data);
         fileWriter.close();
     }
 }
