@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -7,8 +8,11 @@ import java.util.stream.Collectors;
 public class AddressBook {
     ArrayList<Contact> contactList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
+    private static final String PATH = "C:\\AddressBookSystem\\src\\main\\resources";
 
-    void addContact() throws IOException {
+
+
+    void addContact() {
         System.out.println("Enter the first name");
         String firstName = scanner.next().toLowerCase();
         if (contactList.stream().anyMatch(x -> x.getFirstName().toLowerCase().equals(firstName))) {
@@ -26,24 +30,50 @@ public class AddressBook {
         System.out.println("Enter the state: ");
         contact.setState(scanner.next());
         System.out.println("Enter the zip code: ");
-        contact.setZip(scanner.nextInt());
+        contact.setZip(scanner.next());
         System.out.println("Enter phone number: ");
-        contact.setPhoneNumber(scanner.nextLong());
+        contact.setPhoneNumber(scanner.next());
         System.out.println("Enter email: ");
         contact.setEmail(scanner.next());
-        contactList.sort(Comparator.comparing(Contact::getFirstName));
+
         contactList.add(contact);
-        writeData();
     }
 
-    public void showDetails() throws IOException {
+    void writeAddressBook(ArrayList<Contact> arrayList,String addressBookName) throws IOException {
+        System.out.println("Enter\n 1) To write to txt file\n 2) To write to CSV file");
+        int option = scanner.nextInt();
+        switch (option){
+            case 1:
+                FileReaderWriter.writeTxt(arrayList, addressBookName);
+                break;
+            case 2:
+                FileReaderWriter.writeCSV(arrayList, addressBookName);
+                break;
+        }
+
+    }
+
+    void readAddressBook(String addressBookName) throws IOException {
+        System.out.println("Select option \n1.read from text file \n2.read from csv file");
+        int option = scanner.nextInt();
+        switch (option) {
+            case 1:
+                FileReaderWriter.readTxtFile(new File(FileReaderWriter.PATH.concat(addressBookName+".txt")));
+                break;
+            case 2:
+                FileReaderWriter.readCSVFile(new File(FileReaderWriter.PATH.concat( addressBookName +".csv")));
+                break;
+        }
+    }
+
+
+    public void showDetails() {
         if(contactList.isEmpty()){
             System.out.println("No contacts to search in the addressBook");
             return;
         }
         contactList.sort(Comparator.comparing(Contact::getFirstName));
-//        contactList.forEach(System.out::println);
-        readData();
+        contactList.forEach(System.out::println);
     }
 
     void editContact() {
@@ -70,10 +100,10 @@ public class AddressBook {
                 contact.setState(scanner.next());
 
                 System.out.println("Edit zip code: ");
-                contact.setZip(scanner.nextInt());
+                contact.setZip(scanner.next());
 
                 System.out.println("Edit phone number:");
-                contact.setPhoneNumber(scanner.nextInt());
+                contact.setPhoneNumber(scanner.next());
 
                 System.out.println("Edit email: ");
                 contact.setEmail(scanner.next());
@@ -95,16 +125,6 @@ public class AddressBook {
                 System.out.println("contact not found");
             }
         }
-    }
-
-    void writeData() throws IOException {
-        FileIOService fileIOService = new FileIOService();
-        fileIOService.writeData();
-    }
-
-    void readData() throws IOException {
-        FileIOService fileIOService = new FileIOService();
-        fileIOService.readData();
     }
 
     void viewContacts() {
